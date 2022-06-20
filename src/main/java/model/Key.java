@@ -1,15 +1,15 @@
-package Tuple;
+package model;
 
 import java.time.LocalDateTime;
 
 public final class Key {
 
     private final LocalDateTime dateTime;
-    private final String location;
+    private final String cityName;
 
-    public Key(LocalDateTime dateTime, String location) {
+    public Key(LocalDateTime dateTime, String cityName) {
         this.dateTime = dateTime;
-        this.location = location;
+        this.cityName = cityName;
     }
 
     public LocalDateTime getDateTime() {
@@ -17,14 +17,14 @@ public final class Key {
     }
 
     public String getLocation() {
-        return location;
+        return cityName;
     }
 
     @Override
     public String toString() {
         return "Key{" +
                 "dateTime=" + dateTime +
-                ", location='" + location + '\'' +
+                ", cityName='" + cityName + '\'' +
                 '}';
     }
 }

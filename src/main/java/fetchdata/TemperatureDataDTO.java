@@ -1,4 +1,4 @@
-package JSON;
+package fetchdata;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -12,16 +12,16 @@ public class TemperatureDataDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime datetime;
-
     private Map<String, Double> temperatureByLocation = new HashMap<>();
+
 
     public LocalDateTime getDatetime() {
         return datetime;
     }
-
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
+
 
     @JsonAnyGetter
     public Map<String, Double> getTemperatureByLocation() {

@@ -1,4 +1,4 @@
-package JSON;
+package fetchdata;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,10 +14,6 @@ public class DeserializeJSON implements DeserializeStrategy {
 
     public DeserializeJSON(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-    }
-
-    public DeserializeJSON(){
-        objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
     }
 

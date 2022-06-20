@@ -1,4 +1,4 @@
-package Tuple;
+package model;
 
 public final class Pair {
 

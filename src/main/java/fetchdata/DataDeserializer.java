@@ -1,4 +1,4 @@
-package JSON;
+package fetchdata;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,13 +6,13 @@ import java.util.List;
 
 public class DataDeserializer {
 
-    private final DeserializeStrategy deserializationMethod;
+    private DeserializeStrategy deserializationMethod;
 
     public DataDeserializer(DeserializeStrategy deserializationMethod) {
         this.deserializationMethod = deserializationMethod;
     }
 
-    public List<TemperatureDataDTO> fetchData(File inputFile) throws IOException {
+    public List<TemperatureDataDTO> deserializeData(File inputFile) throws IOException {
         return deserializationMethod.deserialize(inputFile);
     }
 }

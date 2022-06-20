@@ -1,13 +1,13 @@
-package Tuple;
+package model;
 
-import JSON.TemperatureDataDTO;
+import fetchdata.TemperatureDataDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ModelMapper {
+public class TupleMapper{
 
     public List<Pair> mapDTOsToTuples(List<TemperatureDataDTO> DTOs){
         List<Pair> tuples = new ArrayList<>();
@@ -32,8 +32,8 @@ public class ModelMapper {
     private List<Pair> createTuples(LocalDateTime dateTime, Map<String, Double> valuesByLocation){
         List<Pair> tuples = new ArrayList<>();
         valuesByLocation.forEach(
-                (place, value) -> tuples.add(
-                new Pair(new Key(dateTime, place), value)
+                (location, value) -> tuples.add(
+                new Pair(new Key(dateTime, location), value)
         ));
         return tuples;
     }

@@ -1,4 +1,4 @@
-package JSON;
+package fetchdata;
 
 import java.io.File;
 import java.io.IOException;
