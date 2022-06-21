@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AggregationEngine implements Observer{
+
     public List<Pair> tuplesToAggregate = new ArrayList<>();
 
     @Override
@@ -16,7 +17,6 @@ public class AggregationEngine implements Observer{
 
     public void aggregateTuples()
     {
-
+        throw new UnsupportedOperationException();
     }
-
 }

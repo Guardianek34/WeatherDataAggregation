@@ -1,4 +1,8 @@
 import aggregation.AggregationEngine;
+import aggregation.filters.AfterDateStep;
+import aggregation.filters.BeforeDateStep;
+import aggregation.filters.FilterPipeline;
+import aggregation.filters.LocationStep;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fetchdata.DataDeserializer;
 import fetchdata.DataReceiver;
@@ -8,6 +12,7 @@ import model.Pair;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +34,6 @@ public class Main {
             System.out.println(e.getMessage());
             return;
         }
-
         //System.out.println(tuples.size()); // 1621078
     }
 }

@@ -12,6 +12,10 @@ public class DataDeserializer {
         this.deserializationMethod = deserializationMethod;
     }
 
+    public void setDeserializationMethod(DeserializeStrategy deserializationMethod) {
+        this.deserializationMethod = deserializationMethod;
+    }
+
     public List<TemperatureDataDTO> deserializeData(File inputFile) throws IOException {
         return deserializationMethod.deserialize(inputFile);
     }

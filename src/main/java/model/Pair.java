@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public final class Pair {
 
     private final Key key;
@@ -12,6 +14,14 @@ public final class Pair {
 
     public Key getKey() {
         return key;
+    }
+
+    public LocalDateTime getDateTime() {
+        return key.getDateTime();
+    }
+
+    public String getLocation() {
+        return key.getLocation();
     }
 
     public Double getValue() {
