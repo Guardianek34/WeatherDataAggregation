@@ -2,17 +2,17 @@ package aggregation.filters;
 
 public class FilterPipeline<I, O> {
 
-    private final Step<I, O> currentStep;
+    private final Stage<I, O> currentStage;
 
-    public FilterPipeline(Step<I, O> currentStep) {
-        this.currentStep = currentStep;
+    public FilterPipeline(Stage<I, O> currentStage) {
+        this.currentStage = currentStage;
     }
 
-    public <K> FilterPipeline<I, K> addStep(Step<O, K> next) {
-        return new FilterPipeline<>(input -> next.process(currentStep.process(input)));
+    public <K> FilterPipeline<I, K> addStep(Stage<O, K> next) {
+        return new FilterPipeline<>(input -> next.process(currentStage.process(input)));
     }
 
-    public O execute(I input) {
-        return currentStep.process(input);
+    public O filter(I input) {
+        return currentStage.process(input);
     }
 }

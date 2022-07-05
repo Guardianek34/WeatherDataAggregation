@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AfterDateStep implements Step<List<Pair>, List<Pair>>{
+public class AfterDateStage implements Stage<List<Pair>, List<Pair>> {
 
     private final LocalDateTime dateTime;
 
-    public AfterDateStep(LocalDateTime dateTime) {
+    public AfterDateStage(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

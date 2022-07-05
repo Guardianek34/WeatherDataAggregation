@@ -1,5 +1,5 @@
 package aggregation.filters;
 
-public interface Step<I, O> {
+public interface Stage<I, O> {
     O process(I input);
 }

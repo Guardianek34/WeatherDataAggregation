@@ -5,5 +5,5 @@ import model.Pair;
 import java.util.List;
 
 public interface ArithmeticAggregation {
-    Double aggregate(List<Pair> filteredData);
+    double aggregate(List<Pair> filteredData);
 }

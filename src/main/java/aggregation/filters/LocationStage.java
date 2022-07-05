@@ -5,11 +5,11 @@ import model.Pair;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LocationStep implements Step<List<Pair>, List<Pair>> {
+public class LocationStage implements Stage<List<Pair>, List<Pair>> {
 
     private final String cityName;
 
-    public LocationStep(String cityName) {
+    public LocationStage(String cityName) {
         this.cityName = cityName;
     }
 

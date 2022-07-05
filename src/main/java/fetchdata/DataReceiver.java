@@ -7,12 +7,13 @@ import model.TupleMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DataReceiver implements Observable {
 
-    private TupleMapper mapper;
-    private DataDeserializer deserializer;
+    private final TupleMapper mapper;
+    private final DataDeserializer deserializer;
     private Observer aggregationEngine;
 
     public DataReceiver(TupleMapper mapper, DataDeserializer deserializer, Observer aggregationEngine) {
@@ -24,7 +25,7 @@ public class DataReceiver implements Observable {
     public void fetchData(File inputFile) throws IOException {
         List<TemperatureDataDTO> weatherData = deserializer.deserializeData(inputFile);
         List<Pair> mappedData = mapper.mapDTOsToTuples(weatherData);
-        notify(aggregationEngine, mappedData);
+        notify(aggregationEngine, mappedData, LocalDateTime.now());
     }
 
     @Override
@@ -33,7 +34,7 @@ public class DataReceiver implements Observable {
     }
 
     @Override
-    public void notify(Observer o, List<Pair> data) {
-        this.aggregationEngine.update(data);
+    public void notify(Observer o, List<Pair> data, LocalDateTime timeStamp) {
+        this.aggregationEngine.update(data, timeStamp);
     }
 }
