@@ -6,9 +6,9 @@ import java.util.List;
 
 public class AggregateFunction {
 
-    private ArithmeticAggregation function;
+    private final AggregationStrategy function;
 
-    public AggregateFunction(ArithmeticAggregation function) {
+    public AggregateFunction(AggregationStrategy function) {
         this.function = function;
     }
 

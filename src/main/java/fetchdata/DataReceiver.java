@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Concrete class responsible for passing new data from stream to aggregationEngine.
+ */
 public class DataReceiver implements Observable {
 
     private final TupleMapper mapper;
@@ -25,6 +28,12 @@ public class DataReceiver implements Observable {
     public void fetchData(File inputFile) throws IOException {
         List<TemperatureDataDTO> weatherData = deserializer.deserializeData(inputFile);
         List<Pair> mappedData = mapper.mapDTOsToTuples(weatherData);
+        /*
+            aggregationEngine gets notified with a timeStamp and data (in final version time should be extracted from
+            one of the entries)
+            - assuming that all the entries coming in "single package" got same timestamp
+            - not supporting timeframe
+         */
         notify(aggregationEngine, mappedData, LocalDateTime.now());
     }
 
@@ -34,7 +43,7 @@ public class DataReceiver implements Observable {
     }
 
     @Override
-    public void notify(Observer o, List<Pair> data, LocalDateTime timeStamp) {
-        this.aggregationEngine.update(data, timeStamp);
+    public void notify(Observer o, List<Pair> data, LocalDateTime dataTimeStamp) {
+        this.aggregationEngine.update(data, dataTimeStamp);
     }
 }

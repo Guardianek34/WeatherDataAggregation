@@ -5,6 +5,9 @@ import model.Pair;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * WHERE cityName = "exampleCity"
+ */
 public class LocationStage implements Stage<List<Pair>, List<Pair>> {
 
     private final String cityName;

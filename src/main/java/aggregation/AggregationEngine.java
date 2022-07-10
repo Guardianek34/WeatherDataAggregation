@@ -7,21 +7,42 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Most important class in our program - responsible for aggregating all aggregates.
+ * Also stores newly read data.
+ */
 public class AggregationEngine implements Observer{
 
-    public List<Pair> tuplesToAggregate = new ArrayList<>();
+    /**
+     * New Data
+     */
+    public List<Pair> data = new ArrayList<>();
+
+    /**
+     * MAL - Materialized Aggregates List
+     */
     public List<Aggregate> aggregatesList = new ArrayList<>();
+
 
     @Override
     public void update(List<Pair> data, LocalDateTime timeStamp) {
-        this.tuplesToAggregate = data;
-        this.aggregateTuples(timeStamp);
+        this.data = data;
+        this.aggregateTuples(timeStamp); // after receiving data - aggregate
     }
 
+    public void addAggregate(Aggregate aggregate){
+        this.aggregatesList.add(aggregate);
+    }
+
+    /**
+     * Filtering out completed aggregates
+     * (assuming data that comes from external API is fresh)
+     * @param timeStamp timeStamp of a fresh data
+     */
     public void aggregateTuples(LocalDateTime timeStamp)
     {
-        aggregatesList.stream()
-                .filter(a -> !a.isCompleted())
-                .forEach(a -> a.updateAggregate(tuplesToAggregate, timeStamp));
+        this.aggregatesList.stream()
+                .filter(a -> !a.isCompleted()) // never considering finished aggregates - they are read-only
+                .forEach(a -> a.updateAggregate(data, timeStamp));
     }
 }

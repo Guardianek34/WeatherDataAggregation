@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * WHERE Date < "exampleDate"
+ */
 public class BeforeDateStage implements Stage<List<Pair>, List<Pair>> {
 
     private final LocalDateTime dateTime;

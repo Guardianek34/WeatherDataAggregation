@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class responsible for mapping TemperatureDTO -> Pair (tuples)
+ */
 public class TupleMapper{
 
     public List<Pair> mapDTOsToTuples(List<TemperatureDataDTO> DTOs){
@@ -34,7 +37,8 @@ public class TupleMapper{
         valuesByLocation.forEach(
                 (location, value) -> tuples.add(
                 new Pair(new Key(dateTime, location), value)
-        ));
+            )
+        );
         return tuples;
     }
 }

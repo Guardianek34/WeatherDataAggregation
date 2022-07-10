@@ -4,6 +4,6 @@ import model.Pair;
 
 import java.util.List;
 
-public interface ArithmeticAggregation {
+public interface AggregationStrategy {
     double aggregate(List<Pair> filteredData);
 }
