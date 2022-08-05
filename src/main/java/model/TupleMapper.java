@@ -29,14 +29,15 @@ public class TupleMapper{
 
     private void filterOutNullValues(Map<String, Double> valuesByLocation)
     {
-        valuesByLocation.keySet().removeIf(key -> valuesByLocation.get(key) == null);
+        valuesByLocation.keySet()
+                .removeIf(key -> valuesByLocation.get(key) == null);
     }
 
     private List<Pair> createTuples(LocalDateTime dateTime, Map<String, Double> valuesByLocation){
         List<Pair> tuples = new ArrayList<>();
         valuesByLocation.forEach(
-                (location, value) -> tuples.add(
-                new Pair(new Key(dateTime, location), value)
+                (cityName, value) -> tuples.add(
+                new Pair(new Key(dateTime, new City(cityName)), value)
             )
         );
         return tuples;

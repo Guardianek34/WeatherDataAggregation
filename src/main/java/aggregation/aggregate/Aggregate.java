@@ -16,16 +16,16 @@ public class Aggregate {
     private boolean isCompleted;
     private final FilterPipeline<List<Pair>, List<Pair>> pipeline;
     private final AggregateFunction arithmeticMethod;
-    private final TimeFrame timeFrame;
+    private final TimeSpan timeSpan;
 
     public Aggregate(FilterPipeline<List<Pair>, List<Pair>> pipeline,
                      AggregateFunction arithmeticMethod,
-                     TimeFrame timeFrame) {
+                     TimeSpan timeSpan) {
         this.calculatedValue = 0.0f;
         this.isCompleted = false;
         this.pipeline = pipeline;
         this.arithmeticMethod = arithmeticMethod;
-        this.timeFrame = timeFrame;
+        this.timeSpan = timeSpan;
     }
 
     public double getCalculatedValue() {
@@ -40,9 +40,9 @@ public class Aggregate {
 
         boolean hasBeenFinished = evaluateCompletion(dataTimeStamp);
 
+        // when the flag is set true, aggregate becomes read-only
+        // and is never updated again
         if(hasBeenFinished){
-            // when the flag is set true, aggregate becomes read-only
-            // and is never updated again
             this.isCompleted = true;
         }
         else aggregate(pipeline.filter(data));
@@ -56,6 +56,6 @@ public class Aggregate {
     public boolean evaluateCompletion(LocalDateTime dataTimeStamp){
         // aggregate is judged as completed when data timeStamp is not in timeFrame
         // (future data won't affect the result of aggregation assuming it will be newer)
-        return !timeFrame.isDateInRange(dataTimeStamp);
+        return !timeSpan.isDateInRange(dataTimeStamp);
     }
 }

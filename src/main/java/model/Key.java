@@ -5,26 +5,26 @@ import java.time.LocalDateTime;
 public final class Key {
 
     private final LocalDateTime dateTime;
-    private final String cityName;
+    private final City city;
 
-    public Key(LocalDateTime dateTime, String cityName) {
+    public Key(LocalDateTime dateTime, City city) {
         this.dateTime = dateTime;
-        this.cityName = cityName;
+        this.city = city;
     }
 
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public String getLocation() {
-        return cityName;
+    public City getCity() {
+        return city;
     }
 
     @Override
     public String toString() {
         return "Key{" +
                 "dateTime=" + dateTime +
-                ", cityName='" + cityName + '\'' +
+                ", cityName='" + city.getCityName() + '\'' +
                 '}';
     }
 }

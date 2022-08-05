@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 /**
  * Immutable class representing timeframe.
  */
-public class TimeFrame {
+public class TimeSpan {
     // contains LocalDateTime.MIN when startDate doesn't matter
     private final LocalDateTime startDate;
     // contains LocalDateTime.MAX when endDate doesn't matter
     private final LocalDateTime endDate;
 
-    private TimeFrame(LocalDateTime startDate, LocalDateTime endDate) {
+    private TimeSpan(LocalDateTime startDate, LocalDateTime endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -30,12 +30,12 @@ public class TimeFrame {
      * @param startDate earlier Date
      * @param endDate later Date
      */
-    public static TimeFrame createDateRange(LocalDateTime startDate, LocalDateTime endDate){
+    public static TimeSpan createDateRange(LocalDateTime startDate, LocalDateTime endDate){
         if(startDate.isAfter(endDate)) {
             throw new IllegalArgumentException();
         }
 
-        return new TimeFrame(startDate, endDate);
+        return new TimeSpan(startDate, endDate);
     }
 
     /**

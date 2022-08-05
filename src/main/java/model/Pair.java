@@ -20,10 +20,6 @@ public final class Pair {
         return key.getDateTime();
     }
 
-    public String getLocation() {
-        return key.getLocation();
-    }
-
     public Double getValue() {
         return value;
     }

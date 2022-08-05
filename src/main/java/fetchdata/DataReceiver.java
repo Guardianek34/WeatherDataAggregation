@@ -19,7 +19,9 @@ public class DataReceiver implements Observable {
     private final DataDeserializer deserializer;
     private Observer aggregationEngine;
 
-    public DataReceiver(TupleMapper mapper, DataDeserializer deserializer, Observer aggregationEngine) {
+    public DataReceiver(TupleMapper mapper,
+                        DataDeserializer deserializer,
+                        Observer aggregationEngine) {
         this.mapper = mapper;
         this.deserializer = deserializer;
         this.aggregationEngine = aggregationEngine;
@@ -29,8 +31,8 @@ public class DataReceiver implements Observable {
         List<TemperatureDataDTO> weatherData = deserializer.deserializeData(inputFile);
         List<Pair> mappedData = mapper.mapDTOsToTuples(weatherData);
         /*
-            aggregationEngine gets notified with a timeStamp and data (in final version time should be extracted from
-            one of the entries)
+            aggregationEngine gets notified with a timeStamp and data (in final version time should
+            be extracted from one of the entries)
             - assuming that all the entries coming in "single package" got same timestamp
             - not supporting timeframe
          */
