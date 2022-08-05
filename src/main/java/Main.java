@@ -4,6 +4,7 @@ import aggregation.factories.AggregateFactory;
 import aggregation.factories.TimeSpanFactory;
 import aggregation.filters.LocationStage;
 import aggregation.functions.AggregateFunction;
+import aggregation.functions.CountFunction;
 import aggregation.functions.SumFunction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fetchdata.DataDeserializer;
@@ -28,11 +29,13 @@ public class Main {
         AggregateFactory aggregateFactory = new AggregateFactory();
         TimeSpanFactory timeSpanFactory = new TimeSpanFactory();
         Aggregate sumAggregateAtlanta = aggregateFactory.createAggregate(
-                timeSpanFactory.createDateRangeBefore(
-                        LocalDateTime.of(2024, 10, 12, 20, 20)
+                timeSpanFactory.createDateRangeInPeriod(
+                        // 2012-10-01 23:00:00
+                        LocalDateTime.of(2012, 10, 1, 23, 0),
+                        LocalDateTime.of(2012, 10, 2, 1, 0)
                 ),
                 new LocationStage("Atlanta"),
-                new AggregateFunction(new SumFunction())
+                new AggregateFunction(new CountFunction())
         );
 
         engine.addAggregate(sumAggregateAtlanta);

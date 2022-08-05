@@ -19,7 +19,7 @@ public class LocationStage implements Stage<List<Pair>, List<Pair>> {
     @Override
     public List<Pair> process(List<Pair> input) {
         return input.stream()
-                .filter(p -> p.getLocation().equals(cityName))
+                .filter(p -> p.getCityName().equals(cityName))
                 .collect(Collectors.toList());
     }
 }

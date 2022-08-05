@@ -45,7 +45,8 @@ public class Aggregate {
         if(hasBeenFinished){
             this.isCompleted = true;
         }
-        else aggregate(pipeline.filter(data));
+
+        aggregate(pipeline.filter(data));
     }
 
     public void aggregate(List<Pair> filteredData){

@@ -23,12 +23,13 @@ public class PipelineFactory {
 
         // stages correlated to time
         if(isStartTimePresent && isEndTimePresent){
-            filterPipeline.addStep(new BeforeDateStage(timeSpan.getEndDate()));
-            filterPipeline.addStep(new AfterDateStage(timeSpan.getStartDate()));
+            return filterPipeline
+                    .addStep(new BeforeDateStage(timeSpan.getEndDate()))
+                    .addStep(new AfterDateStage(timeSpan.getStartDate()));
         } else if (isStartTimePresent){
-            filterPipeline.addStep(new AfterDateStage(timeSpan.getStartDate()));
+            return filterPipeline.addStep(new AfterDateStage(timeSpan.getStartDate()));
         } else if (isEndTimePresent) {
-            filterPipeline.addStep(new BeforeDateStage(timeSpan.getEndDate()));
+            return filterPipeline.addStep(new BeforeDateStage(timeSpan.getEndDate()));
         }
 
         return filterPipeline;

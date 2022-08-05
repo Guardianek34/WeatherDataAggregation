@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDateTime;
 
 public final class Pair {
-
     private final Key key;
     private final Double value;
 
@@ -19,6 +18,10 @@ public final class Pair {
     public LocalDateTime getDateTime() {
         return key.getDateTime();
     }
+
+    public City getCity() { return key.getCity(); }
+
+    public String getCityName() { return key.getCity().getCityName(); }
 
     public Double getValue() {
         return value;
