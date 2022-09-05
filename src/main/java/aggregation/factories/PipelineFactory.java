@@ -7,6 +7,7 @@ import model.Pair;
 import javax.xml.stream.Location;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class PipelineFactory {
@@ -18,8 +19,10 @@ public class PipelineFactory {
         // using LocalDateTime.MIN and MAX to represent whether values are present (instead of null values)
         // look at TimeSpanFactory
         boolean isStartTimePresent = !timeSpan.getStartDate().isEqual(LocalDateTime.MIN);
-        boolean isEndTimePresent = !timeSpan.getStartDate().isEqual(LocalDateTime.MAX);
-        FilterPipeline<List<Pair>, List<Pair>> filterPipeline = new FilterPipeline<>(locationStage);
+        boolean isEndTimePresent = !timeSpan.getEndDate().isEqual(LocalDateTime.MAX);
+
+        FilterPipeline<List<Pair>, List<Pair>> filterPipeline =
+                new FilterPipeline<>(Objects.requireNonNullElseGet(locationStage, NoOperationStage::new));
 
         // stages correlated to time
         if(isStartTimePresent && isEndTimePresent){

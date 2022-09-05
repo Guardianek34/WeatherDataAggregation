@@ -7,11 +7,11 @@ import model.Pair;
 
 import java.util.List;
 
-public class DivideAggregate extends Aggregate {
+public class AverageAggregate extends Aggregate {
     private final Integer size = 0;
 
-    public DivideAggregate(FilterPipeline<List<Pair>, List<Pair>> pipeline,
-                           TimeSpan timeSpan) {
+    public AverageAggregate(FilterPipeline<List<Pair>, List<Pair>> pipeline,
+                            TimeSpan timeSpan) {
         super(pipeline, new AggregateFunction(new SumFunction()), timeSpan);
     }
 

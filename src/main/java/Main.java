@@ -3,9 +3,11 @@ import aggregation.aggregate.Aggregate;
 import aggregation.factories.AggregateFactory;
 import aggregation.factories.TimeSpanFactory;
 import aggregation.filters.LocationStage;
+import aggregation.filters.NoOperationStage;
 import aggregation.functions.AggregateFunction;
 import aggregation.functions.CountFunction;
 import aggregation.functions.SumFunction;
+import aggregation.functions.SumFunctionGPU;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fetchdata.DataDeserializer;
 import fetchdata.DataReceiver;
@@ -13,6 +15,7 @@ import fetchdata.DeserializeJSON;
 import jcuda.Pointer;
 import jcuda.runtime.JCuda;
 import model.TupleMapper;
+import org.apache.commons.math3.stat.descriptive.summary.Sum;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,17 +23,6 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args){
-        /*
-        Pointer pointer = new Pointer();
-        JCuda.cudaMalloc(pointer, 4);
-        System.out.println("Pointer" + pointer);
-        JCuda.cudaFree(pointer);
-        */
-
-        /* JCUDA */
-
-        //org.openjdk.jmh.Main.main(args);
-
         File inputFile = new File(Main.class.getClassLoader().getResource("temperature.json").getFile());
 
         DataDeserializer jsonDeserializer = new DataDeserializer(new DeserializeJSON(new ObjectMapper()));
@@ -40,13 +32,39 @@ public class Main {
 
         AggregateFactory aggregateFactory = new AggregateFactory();
         TimeSpanFactory timeSpanFactory = new TimeSpanFactory();
-        Aggregate sumAggregateAtlanta = aggregateFactory.createSumAggregate(
+
+        Aggregate countAtlanta = aggregateFactory.createSumAggregate(
                 timeSpanFactory.createInfiniteTimeFrame(),
                 new LocationStage("Atlanta"),
                 new AggregateFunction(new CountFunction())
         );
 
-        engine.addAggregate(sumAggregateAtlanta);
+        engine.addAggregate(countAtlanta);
+
+        Aggregate sumAllCities = aggregateFactory.createSumAggregate(
+                timeSpanFactory.createInfiniteTimeFrame(),
+                new AggregateFunction(new SumFunction())
+        );
+
+        engine.addAggregate(sumAllCities);
+
+        Aggregate averageDallasFrom2012To2013 = aggregateFactory.createAverageAggregate(
+                timeSpanFactory.createDateRangeInPeriod(
+                        LocalDateTime.of(2012, 1, 1, 0, 0),
+                        LocalDateTime.of(2013, 1, 1, 0, 0)),
+                new LocationStage("Dallas")
+        );
+
+        engine.addAggregate(averageDallasFrom2012To2013);
+
+        Aggregate sumInVancouverBeforeSpecificDate = aggregateFactory.createSumAggregate(
+                timeSpanFactory.createDateRangeBefore(
+                        LocalDateTime.of(2012, 10, 1, 18, 0)),
+                new LocationStage("Vancouver"),
+                new AggregateFunction(new SumFunctionGPU())
+        );
+
+        engine.addAggregate(sumInVancouverBeforeSpecificDate);
 
         try {
             receiver.fetchData(inputFile);
