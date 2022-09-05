@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fetchdata.DataDeserializer;
 import fetchdata.DataReceiver;
 import fetchdata.DeserializeJSON;
+import jcuda.Pointer;
+import jcuda.runtime.JCuda;
 import model.TupleMapper;
 
 import java.io.File;
@@ -18,6 +20,16 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args){
+        /*
+        Pointer pointer = new Pointer();
+        JCuda.cudaMalloc(pointer, 4);
+        System.out.println("Pointer" + pointer);
+        JCuda.cudaFree(pointer);
+        */
+
+        /* JCUDA */
+
+        //org.openjdk.jmh.Main.main(args);
 
         File inputFile = new File(Main.class.getClassLoader().getResource("temperature.json").getFile());
 
@@ -28,12 +40,8 @@ public class Main {
 
         AggregateFactory aggregateFactory = new AggregateFactory();
         TimeSpanFactory timeSpanFactory = new TimeSpanFactory();
-        Aggregate sumAggregateAtlanta = aggregateFactory.createAggregate(
-                timeSpanFactory.createDateRangeInPeriod(
-                        // 2012-10-01 23:00:00
-                        LocalDateTime.of(2012, 10, 1, 23, 0),
-                        LocalDateTime.of(2012, 10, 2, 1, 0)
-                ),
+        Aggregate sumAggregateAtlanta = aggregateFactory.createSumAggregate(
+                timeSpanFactory.createInfiniteTimeFrame(),
                 new LocationStage("Atlanta"),
                 new AggregateFunction(new CountFunction())
         );

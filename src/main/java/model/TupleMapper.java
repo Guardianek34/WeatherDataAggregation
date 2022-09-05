@@ -1,6 +1,7 @@
 package model;
 
 import fetchdata.TemperatureDataDTO;
+import gnu.trove.list.TIntList;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

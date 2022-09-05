@@ -41,7 +41,7 @@ public class AggregationEngine implements Observer{
      */
     public void aggregateTuples(LocalDateTime timeStamp)
     {
-        this.aggregatesList.stream()
+        this.aggregatesList.parallelStream()
                 .filter(a -> !a.isCompleted()) // never considering finished aggregates - they are read-only
                 .forEach(a -> a.updateAggregate(data, timeStamp));
     }
