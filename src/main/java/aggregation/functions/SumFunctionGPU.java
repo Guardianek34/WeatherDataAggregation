@@ -1,9 +1,6 @@
 package aggregation.functions;
 
-import JThrustRTC.DVInt32;
-import JThrustRTC.DVVector;
-import JThrustRTC.Functor;
-import JThrustRTC.TRTC;
+import JThrustRTC.*;
 import model.Pair;
 
 import java.util.List;
@@ -16,6 +13,6 @@ public class SumFunctionGPU implements AggregationStrategy{
                 .toArray();
 
         DVVector vec = new DVVector(dataValues);
-        return (double) TRTC.Reduce(vec, new DVInt32(0), new Functor("Plus"));
+        return (double) TRTC.Reduce(vec, new DVDouble(0), new Functor("Plus"));
     }
 }
