@@ -12,7 +12,7 @@ public class AggregateFunction {
         this.function = function;
     }
 
-    public Double calculateValue(List<Pair> filteredData){
+    public Double calculateValue(List<Pair> filteredData) {
         return function.aggregate(filteredData);
     }
 }

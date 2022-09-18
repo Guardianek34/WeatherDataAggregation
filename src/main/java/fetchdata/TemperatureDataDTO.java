@@ -18,6 +18,7 @@ public class TemperatureDataDTO {
     public LocalDateTime getDatetime() {
         return datetime;
     }
+
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
@@ -33,7 +34,7 @@ public class TemperatureDataDTO {
     }
 
     @JsonAnySetter
-    public void addTemperatureByLocation(String location, Double temperature){
+    public void addTemperatureByLocation(String location, Double temperature) {
         this.temperatureByLocation.put(location, temperature);
     }
 

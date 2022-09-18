@@ -4,17 +4,15 @@ import aggregation.aggregate.TimeSpan;
 import aggregation.filters.*;
 import model.Pair;
 
-import javax.xml.stream.Location;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class PipelineFactory {
 
     public FilterPipeline<List<Pair>, List<Pair>> createPipelineByLocationTime(
             TimeSpan timeSpan,
-            LocationStage locationStage){
+            LocationStage locationStage) {
 
         // using LocalDateTime.MIN and MAX to represent whether values are present (instead of null values)
         // look at TimeSpanFactory
@@ -25,11 +23,11 @@ public class PipelineFactory {
                 new FilterPipeline<>(Objects.requireNonNullElseGet(locationStage, NoOperationStage::new));
 
         // stages correlated to time
-        if(isStartTimePresent && isEndTimePresent){
+        if (isStartTimePresent && isEndTimePresent) {
             return filterPipeline
                     .addStep(new BeforeDateStage(timeSpan.getEndDate()))
                     .addStep(new AfterDateStage(timeSpan.getStartDate()));
-        } else if (isStartTimePresent){
+        } else if (isStartTimePresent) {
             return filterPipeline.addStep(new AfterDateStage(timeSpan.getStartDate()));
         } else if (isEndTimePresent) {
             return filterPipeline.addStep(new BeforeDateStage(timeSpan.getEndDate()));

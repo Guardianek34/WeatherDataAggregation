@@ -27,11 +27,12 @@ public class TimeSpan {
     /**
      * Static method instead of public constructor in order to maintain logic.
      * Assuming that startDate < endDate.
+     *
      * @param startDate earlier Date
-     * @param endDate later Date
+     * @param endDate   later Date
      */
-    public static TimeSpan createDateRange(LocalDateTime startDate, LocalDateTime endDate){
-        if(startDate.isAfter(endDate)) {
+    public static TimeSpan createDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException();
         }
 
@@ -41,9 +42,10 @@ public class TimeSpan {
     /**
      * Method used to check if date is in timeFrame.
      * In program used in order to check whether Aggregate is finished.
+     *
      * @param date Timestamp of a data from stream.
      */
-    public boolean isDateInRange(LocalDateTime date){
+    public boolean isDateInRange(LocalDateTime date) {
         return (date.isAfter(startDate) && date.isBefore(endDate));
     }
 }

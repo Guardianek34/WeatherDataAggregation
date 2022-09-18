@@ -21,7 +21,8 @@ public class DeserializeJSON implements DeserializeStrategy {
     public List<TemperatureDataDTO> deserialize(File inputFile) throws IOException {
         return objectMapper.readValue(
                 inputFile,
-                new TypeReference<>(){}
+                new TypeReference<>() {
+                }
         );
     }
 }

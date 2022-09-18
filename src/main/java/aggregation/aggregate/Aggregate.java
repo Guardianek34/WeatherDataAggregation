@@ -29,11 +29,11 @@ public abstract class Aggregate {
         this.timeSpan = timeSpan;
     }
 
-    public void updateAggregate(List<Pair> data, LocalDateTime dataTimeStamp){
+    public void updateAggregate(List<Pair> data, LocalDateTime dataTimeStamp) {
         boolean hasBeenFinished = isAggregateFinished(dataTimeStamp);
         // when the flag is set true, aggregate becomes read-only
         // and is never updated again
-        if(hasBeenFinished){
+        if (hasBeenFinished) {
             this.isCompleted = true;
         }
 
@@ -42,11 +42,11 @@ public abstract class Aggregate {
 
     public abstract void aggregate(List<Pair> filteredData);
 
-    public Double calculateNewValue(List<Pair> filteredData){
+    public Double calculateNewValue(List<Pair> filteredData) {
         return arithmeticMethod.calculateValue(filteredData);
     }
 
-    public boolean isAggregateFinished(LocalDateTime dataTimeStamp){
+    public boolean isAggregateFinished(LocalDateTime dataTimeStamp) {
         // aggregate is judged as completed when data timeStamp is not in timeFrame
         // (future data won't affect the result of aggregation assuming it will be newer)
         return !timeSpan.isDateInRange(dataTimeStamp);

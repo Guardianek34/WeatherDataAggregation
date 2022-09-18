@@ -19,9 +19,13 @@ public final class Pair {
         return key.getDateTime();
     }
 
-    public City getCity() { return key.getCity(); }
+    public City getCity() {
+        return key.getCity();
+    }
 
-    public String getCityName() { return key.getCity().getCityName(); }
+    public String getCityName() {
+        return key.getCity().getCityName();
+    }
 
     public Double getValue() {
         return value;

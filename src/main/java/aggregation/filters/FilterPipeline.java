@@ -3,6 +3,7 @@ package aggregation.filters;
 /**
  * Pipeline for creating SQL-like queries, where each stage of the pipeline
  * filters out input based on location, timeframe.
+ *
  * @param <I> input
  * @param <O> output
  */

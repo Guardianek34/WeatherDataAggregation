@@ -3,26 +3,21 @@ import aggregation.aggregate.Aggregate;
 import aggregation.factories.AggregateFactory;
 import aggregation.factories.TimeSpanFactory;
 import aggregation.filters.LocationStage;
-import aggregation.filters.NoOperationStage;
 import aggregation.functions.AggregateFunction;
 import aggregation.functions.CountFunction;
 import aggregation.functions.SumFunction;
-import aggregation.functions.SumFunctionGPU;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fetchdata.DataDeserializer;
 import fetchdata.DataReceiver;
 import fetchdata.DeserializeJSON;
-import jcuda.Pointer;
-import jcuda.runtime.JCuda;
 import model.TupleMapper;
-import org.apache.commons.math3.stat.descriptive.summary.Sum;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         File inputFile = new File(Main.class.getClassLoader().getResource("temperature.json").getFile());
 
         DataDeserializer jsonDeserializer = new DataDeserializer(new DeserializeJSON(new ObjectMapper()));
@@ -61,7 +56,7 @@ public class Main {
                 timeSpanFactory.createDateRangeBefore(
                         LocalDateTime.of(2012, 10, 1, 18, 0)),
                 new LocationStage("Vancouver"),
-                new AggregateFunction(new SumFunctionGPU())
+                new AggregateFunction(new SumFunction())
         );
 
         engine.addAggregate(sumInVancouverBeforeSpecificDate);
