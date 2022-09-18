@@ -18,9 +18,7 @@ public class AggregationEngine implements Observer {
      */
     public List<Pair> data = new ArrayList<>();
 
-    /**
-     * MAL - Materialized Aggregates List
-     */
+
     public List<Aggregate> aggregatesList = new ArrayList<>();
 
 
